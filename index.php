@@ -1,3 +1,15 @@
+<?php
+
+if (isset($_POST['submit']))
+{ 
+$name = $_POST['name'];
+$email = $_POST['email'];
+$activity = $_POST['activity']; 
+$description = $_POST['description']; 
+} 
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -193,32 +205,44 @@
         <div class="col-md-3"></div>
         
         <div class="col-md-6">
-          <h1>Donate time</h1>
+              <h1>Donate time</h1>
               <div class="fifth-text">
+
+<!-- Php for form -->  
+
+<?php
+if (isset($_POST['submit']))
+{
+echo "<div id='confirmation'><h2>Thank you " . $name . " for sending us a message!</h2><br>Here is the information you sent us:<br><br><strong>Email:<br></strong> " . $email . "<br><strong>Activity:<br></strong> " . $activity . "<br><strong>Description:<br></strong> " . $description . "</div>";
+}
+
+else echo'<div>
                   
-                  <div class="form">
-                      <div class="form-group">
-                        <input type="name" class="form-control" id="name" placeholder="Your name"> 
-                      </div>
-                      
-                     <div class="form-group">
-                        <input type="email" class="form-control" id="email" placeholder="Email"> 
-                      </div>
-                      
-                      <div class="form-group">
-                        <input type="activity" class="form-control" id="activity" placeholder='Activity, for example "fika"'> 
-                      </div>
-                      
-                      <div class="form-group">
-                        <textarea type="text" class="form-control" id="text" placeholder="Short description of the activity"></textarea>
-                      </div>
-                      
-                      <button type="Submit" class="btn btn-default">Submit event</button>
-    
-                  </div>
-              
-              </div>
-        </div>
+                    <form class="form" method="post" action="' . $_SERVER['PHP_SELF'] .'">
+
+                        <div class="form-group">
+                            <input type="name" name="name" class="form-control" id="name" placeholder="Your name"> 
+                        </div>
+                          
+                         <div class="form-group">
+                            <input type="email" name="email" class="form-control" id="email" placeholder="Email"> 
+                          </div>
+                          
+                          <div class="form-group">
+                            <input type="activity" name="activity" class="form-control" id="activity" placeholder="Activity, for example fika"> 
+                          </div>
+                          
+                          <div class="form-group">
+                            <textarea type="text" name="description" class="form-control" id="description" placeholder="Short description of the activity"></textarea>
+                          </div>
+                          
+                          <button type="Submit" name="submit" class="btn btn-default">Submit</button>
+        
+                    </form>
+         </div>'    
+?>
+            </div>
+      </div>
         
         <div class="col-md-3"></div>        
     </div>
