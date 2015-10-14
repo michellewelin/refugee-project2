@@ -201,53 +201,53 @@ $description = $_POST['description'];
 
     <!-- Fifth-block -->  
     <div id="sign-up">
-    <div class="fifth-block container">        
-        <div class="col-md-3"></div>
+      <div class="fifth-block container">        
+          <div class="col-md-3"></div>
         
-        <div class="col-md-6">
-              <h1>Donate time</h1>
-              <div class="fifth-text">
+           <div class="col-md-6">
+              
+              
 
-<!-- Php for form -->  
+                  <!-- Php for form -->  
 
-<?php
-if (isset($_POST['submit']))
-{
-echo "<div id='confirmation'><h2>Thank you " . $name . " for sending us a message!</h2><br>Here is the information you sent us:<br><br><strong>Email:<br></strong> " . $email . "<br><strong>Activity:<br></strong> " . $activity . "<br><strong>Description:<br></strong> " . $description . "</div>";
-}
+                  <?php
+                      if (isset($_POST['submit']))
+                      {
+                      echo "<div class='fifth-text'><h2>Thank you " . $name . " for sending us a message!</h2><br>Here is the information you sent us:<br><br><strong>Email:<br></strong> " . $email . "<br><strong>Activity:<br></strong> " . $activity . "<br><strong>Description:<br></strong> " . $description . "</div>";
+                      }
 
-else echo'<div>
-                  
-                    <form class="form" method="post" action="' . $_SERVER['PHP_SELF'] .'">
+                      else echo'<div class="fifth-text"><h1>Donate time</h1>
+                                  
+                                    <form class="form" method="post" action="' . $_SERVER['PHP_SELF'] .'">
 
-                        <div class="form-group">
-                            <input type="name" name="name" class="form-control" id="name" placeholder="Your name"> 
-                        </div>
-                          
-                         <div class="form-group">
-                            <input type="email" name="email" class="form-control" id="email" placeholder="Email"> 
-                          </div>
-                          
-                          <div class="form-group">
-                            <input type="activity" name="activity" class="form-control" id="activity" placeholder="Activity, for example fika"> 
-                          </div>
-                          
-                          <div class="form-group">
-                            <textarea type="text" name="description" class="form-control" id="description" placeholder="Short description of the activity"></textarea>
-                          </div>
-                          
-                          <button type="Submit" name="submit" class="btn btn-default">Submit</button>
-        
-                    </form>
-         </div>'    
-?>
+                                        <div class="form-group">
+                                            <input type="name" name="name" class="form-control" id="name" placeholder="Your name"> 
+                                        </div>
+                                          
+                                         <div class="form-group">
+                                            <input type="email" name="email" class="form-control" id="email" placeholder="Email"> 
+                                          </div>
+                                          
+                                          <div class="form-group">
+                                            <input type="activity" name="activity" class="form-control" id="activity" placeholder="Activity, for example fika"> 
+                                          </div>
+                                          
+                                          <div class="form-group">
+                                            <textarea type="text" name="description" class="form-control" id="description" placeholder="Short description of the activity"></textarea>
+                                          </div>
+                                          
+                                          <button type="Submit" name="submit" class="btn btn-default">Submit</button>
+                        
+                                    </form>
+                                </div>'
+                  ?>
             </div>
-      </div>
         
         <div class="col-md-3"></div>        
-    </div>
-    </div> 
-    <!-- END CONTAINER -->  
+    
+      </div><!-- end/.fifth-block .container -->  
+    </div> <!-- end/#signup -->  
+    
       
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     
