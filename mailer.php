@@ -1,5 +1,5 @@
 <?php
-// Only process POST requests.
+
 
 if( $_SERVER['REQUEST_METHOD'] !== "POST") {
     header("HTTP/1.0 403 Forbidden");
@@ -22,7 +22,6 @@ if ( empty($name) || empty($activity) || filter_var($email, FILTER_VALIDATE_EMAI
 }
 
 // Set the recipient email address.
-// FIXME: Update this to your desired email address.
 $recipient = "hi@michellewelin.com";
 
 // Set the email subject.
