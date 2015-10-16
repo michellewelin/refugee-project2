@@ -1,53 +1,50 @@
 <?php
+// Only process POST requests.
 
-    // Only process POST reqeusts.
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Get the form fields and remove whitespace.
-        $name = strip_tags(trim($_POST["name"]));
-				$name = str_replace(array("\r","\n"),array(" "," "),$name);
-        $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
-        $activity = trim($_POST["activity"]);
-        $description = trim($_POST["description"]);
+if( $_SERVER['REQUEST_METHOD'] !== "POST") {
+    header("HTTP/1.0 403 Forbidden");
+    echo "There was a problem with your submission, please try again.";
+    exit;
+}
 
-        // Check that data was sent to the mailer.
-        if ( empty($name) OR empty($message) OR !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            // Set a 400 (bad request) response code and exit.
-            http_response_code(400);
-            echo "Oops! There was a problem with your submission. Please complete the form and try again.";
-            exit;
-        }
+$name     = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$email    = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+$activity  = filter_input(INPUT_POST, 'activity', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$description  = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-        // Set the recipient email address.
-        // FIXME: Update this to your desired email address.
-        $recipient = "hi@michellewelin.com";
 
-        // Set the email subject.
-        $subject = "New activity from $name";
+// Check that data was sent to the mailer.
+if ( empty($name) || empty($activity) || empty($description) || filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+    // Set a 400 (bad request) response code and exit.
+    header("HTTP/1.0 400 Bad Request");
+    echo "Oops! There was a problem with your submission. Please complete the form and try again.";
+    exit;
+}
 
-        // Build the email content.
-        $email_content = "Name: $name\n";
-        $email_content .= "Email: $email\n\n";
-        $email_content .= "Activity:\n$activity\n";
-        $email_content .= "Description:\n$description\n";
+// Set the recipient email address.
+// FIXME: Update this to your desired email address.
+$recipient = "hi@michellewelin.com";
 
-        // Build the email headers.
-        $email_headers = "From: $name <$email>";
+// Set the email subject.
+$subject = "New contact from $name";
 
-        // Send the email.
-        if (mail($recipient, $subject, $email_content, $email_headers)) {
-            // Set a 200 (okay) response code.
-            http_response_code(200);
-            echo "Thank You! Your message has been sent. We will contact you soon!";
-        } else {
-            // Set a 500 (internal server error) response code.
-            http_response_code(500);
-            echo "Oops! Something went wrong and we couldn't send your message.";
-        }
+// Build the email content.
+$email_content = "Name: $name\n";
+$email_content .= "Email: $email\n\n";
+$email_content .= "Activity:\n$activity\n";
+$email_content .= "Description:\n$description\n";
 
-    } else {
-        // Not a POST request, set a 403 (forbidden) response code.
-        http_response_code(403);
-        echo "There was a problem with your submission, please try again.";
-    }
+// Build the email headers.
+$email_headers = "From: $name <$email>";
 
+// Send the email.
+if (mail($recipient, $subject, $email_content, $email_headers)) {
+    // Set a 200 (okay) response code.
+    header('HTTP/1.0 200 OK');
+    echo "Thank You! Your message has been sent.";
+} else {
+    // Set a 500 (internal server error) response code.
+    header('HTTP/1.0 500 Internal Server Error');
+    echo "Oops! Something went wrong and we couldn't send your message.";
+}
 ?>
