@@ -48,3 +48,4 @@ if (mail($recipient, $subject, $email_content, $email_headers)) {
     echo "Oops! Something went wrong and we couldn't send your message.";
 }
 ?>
+
