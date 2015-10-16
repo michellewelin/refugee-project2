@@ -14,10 +14,10 @@ $description  = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_FULL_SPE
 
 
 // Check that data was sent to the mailer.
-if ( empty($name) || empty($activity) || empty($description) || filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+if ( empty($name) || empty($activity) || filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
     // Set a 400 (bad request) response code and exit.
     header("HTTP/1.0 400 Bad Request");
-    echo "Oops! There was a problem with your submission. Please complete the form and try again.";
+    echo "Oops! You forgot one or a few fields. Please complete the form and try again.";
     exit;
 }
 
@@ -41,11 +41,10 @@ $email_headers = "From: $name <$email>";
 if (mail($recipient, $subject, $email_content, $email_headers)) {
     // Set a 200 (okay) response code.
     header('HTTP/1.0 200 OK');
-    echo "Thank You! Your message has been sent.";
+    echo "Thank You! Your message has been sent. Now you just have to wait for us to contact you.";
 } else {
     // Set a 500 (internal server error) response code.
     header('HTTP/1.0 500 Internal Server Error');
-    echo "Oops! Something went wrong and we couldn't send your message.";
+    echo "Oops! Something went wrong,we couldn't send your message. Try again!";
 }
 ?>
-
