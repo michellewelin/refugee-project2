@@ -1,5 +1,4 @@
 
-
     var submit = function() {
         // Get the form.
         var form = $('#ajax-contact');
@@ -54,3 +53,20 @@
      $('.submit').click(submit);
 
 
+//click functions for happenings
+      $('.sthlm').click(function() {
+
+        $( ".sthlm-show" ).show();
+        $( ".gbg-show" ).hide();
+      });
+
+      $('.gbg').click(function() {
+
+        $( ".gbg-show" ).show();
+        $( ".sthlm-show" ).hide();
+      });    
+
+      $('.all').click(function() {
+
+        $( ".event-img" ).show();
+      });    

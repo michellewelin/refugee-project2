@@ -40,7 +40,7 @@ $email_headers = "From: $name <$email>";
 if (mail($recipient, $subject, $email_content, $email_headers)) {
     // Set a 200 (okay) response code.
     header('HTTP/1.0 200 OK');
-    echo "Thank You! Your message has been sent. Now you just have to wait for us to contact you.";
+    echo "Thank You! Your message has been sent. Your activity will be shown in a while.";
 } else {
     // Set a 500 (internal server error) response code.
     header('HTTP/1.0 500 Internal Server Error');
